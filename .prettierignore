@@ -1,0 +1,12 @@
+node_modules
+dist
+coverage
+.next
+apps/web/next-env.d.ts
+out
+build
+.env
+.env.*
+!.env.example
+*.log
+.DS_Store

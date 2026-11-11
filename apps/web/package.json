@@ -1,0 +1,26 @@
+{
+  "name": "takeoff-web",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Next.js UI for the Autonomous Architectural Blueprint Takeoff Estimator (MVP)",
+  "scripts": {
+    "dev": "next dev -p 3000",
+    "build": "next build",
+    "start": "next start -p 3000",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "next": "^16.4.5",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.3.5",
+    "@types/node": "^22.10.5",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "tailwindcss": "^4.3.5",
+    "typescript": "^5.6.3",
+    "vitest": "^2.1.0"
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "name": "takeoff-estimator",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Autonomous Architectural Blueprint Takeoff Estimator (MVP)",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev:api",
+    "dev:api": "npm run dev -w apps/api",
+    "dev:worker": "npm run worker -w apps/api",
+    "dev:web": "npm run dev -w apps/web",
+    "seed": "npm run seed:pricing -w apps/api",
+    "accuracy:report": "npm run evaluate:accuracy -w apps/api --",
+    "test": "vitest run",
+    "e2e": "playwright test --config e2e/playwright.config.ts",
+    "e2e:install": "playwright install chromium",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "typecheck": "npm run typecheck --workspaces --if-present && npm run typecheck:e2e",
+    "typecheck:e2e": "tsc -p e2e/tsconfig.json"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.17.0",
+    "@playwright/test": "^1.65.0",
+    "@types/node": "^22.10.5",
+    "eslint": "^9.17.0",
+    "eslint-config-prettier": "^9.1.0",
+    "prettier": "^3.4.2",
+    "typescript": "^5.6.3",
+    "typescript-eslint": "^8.16.0",
+    "vitest": "^2.1.6"
+  },
+  "dependencies": {
+    "argon2": "^0.44.0",
+    "exceljs": "^4.4.0",
+    "pdf-lib": "^1.17.1"
+  }
+}

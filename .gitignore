@@ -1,0 +1,13 @@
+node_modules/
+dist/
+coverage/
+.next/
+out/
+/.env
+!.env.example
+*.log
+.DS_Store
+e2e/test-results/
+e2e/playwright-report/
+blob-report/
+
