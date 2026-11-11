@@ -26,7 +26,6 @@ const VALID_TEST_ENV: Record<string, string | undefined> = {
   NODE_ENV: 'production',
   PORT: '4000',
   APP_ORIGIN: 'https://app.example.com',
-  API_BASE_URL: 'https://api.example.com',
   MONGODB_URI: 'mongodb://localhost:27017/takeoff',
   SESSION_IDLE_MINUTES: '30',
   SESSION_ABSOLUTE_HOURS: '12',
@@ -450,9 +449,6 @@ describe('security hardening (M11)', () => {
     );
     expect(() => loadEnv({ ...VALID_TEST_ENV, APP_ORIGIN: 'http://app.example.com' })).toThrow(
       /APP_ORIGIN must use https/,
-    );
-    expect(() => loadEnv({ ...VALID_TEST_ENV, API_BASE_URL: 'http://api.example.com' })).toThrow(
-      /API_BASE_URL must use https/,
     );
     expect(() => loadEnv({ ...VALID_TEST_ENV, SIGNED_URL_TTL_SECONDS: '999' })).toThrow();
     expect(() => loadEnv({ ...VALID_TEST_ENV, EMAIL_FROM: undefined })).toThrow(

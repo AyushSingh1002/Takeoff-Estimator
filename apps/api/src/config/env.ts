@@ -20,7 +20,6 @@ const envKeys = [
   'NODE_ENV',
   'PORT',
   'APP_ORIGIN',
-  'API_BASE_URL',
   'MONGODB_URI',
   'SESSION_IDLE_MINUTES',
   'SESSION_ABSOLUTE_HOURS',
@@ -61,7 +60,6 @@ export const envSchema = z
     NODE_ENV: z.enum(['development', 'test', 'production']),
     PORT: z.coerce.number().int().positive().default(4000),
     APP_ORIGIN: z.string().url(),
-    API_BASE_URL: z.string().url(),
     MONGODB_URI: z.string().min(1),
     SESSION_IDLE_MINUTES: z.coerce.number().int().positive().default(30),
     SESSION_ABSOLUTE_HOURS: z.coerce.number().int().positive().default(12),
@@ -110,7 +108,7 @@ export function loadEnv(source: Record<string, string | undefined> = process.env
   return parsed;
 }
 
-function requireHttps(name: 'APP_ORIGIN' | 'API_BASE_URL', value: string): void {
+function requireHttps(name: 'APP_ORIGIN', value: string): void {
   if (!value.startsWith('https://')) {
     throw new Error(`Invalid configuration: ${name} must use https in production`);
   }
@@ -129,7 +127,6 @@ function validateProductionConfig(env: Env): void {
     throw new Error('Invalid configuration: COOKIE_SECURE must be true in production');
   }
   requireHttps('APP_ORIGIN', env.APP_ORIGIN);
-  requireHttps('API_BASE_URL', env.API_BASE_URL);
   if (env.STORAGE_BUCKET.trim().length === 0) {
     throw new Error('Invalid configuration: STORAGE_BUCKET is required in production');
   }

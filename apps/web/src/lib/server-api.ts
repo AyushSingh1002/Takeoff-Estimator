@@ -16,6 +16,12 @@ export class ServerApiError extends Error {
 }
 
 function apiBaseUrl(): string {
+  if (process.env.API_URL !== undefined) {
+    return process.env.API_URL;
+  }
+  if (process.env.VERCEL === '1') {
+    throw new Error('API_URL service binding is required on Vercel');
+  }
   return process.env.API_BASE_URL ?? 'http://localhost:4000';
 }
 
@@ -32,7 +38,7 @@ export async function serverApi<T>(path: string, init: RequestInit = {}): Promis
   }
   let response: Response;
   try {
-    response = await fetch(`${apiBaseUrl()}/api/v1${path}`, {
+    response = await fetch(new URL(`/api/v1${path}`, apiBaseUrl()), {
       ...init,
       headers,
       cache: 'no-store',

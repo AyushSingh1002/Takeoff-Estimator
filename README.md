@@ -31,6 +31,19 @@ npm run dev:web             # Next.js UI on :3000
 
 Password-reset emails are captured by Mailpit at <http://localhost:8025> (SMTP on `1025`).
 
+## Vercel deployment
+
+The root `vercel.json` configures the `api` (Express) and `web` (Next.js) services in one Vercel
+project. `/api/*` is public through the API service; all other paths are public through the web
+service. The web service receives the API's internal URL through the `API_URL` service binding;
+Vercel supplies this variable, so do not configure it manually.
+
+Configure the API's production environment variables in Vercel, including the public web origin,
+MongoDB, object storage, email delivery, and production processing provider settings. The
+`apps/api/src/worker.ts` queue worker is a separate process rather than an HTTP service and is not
+deployed by this configuration; it still needs an external worker or a separately designed
+scheduled execution setup.
+
 ## Evaluation and launch evidence
 
 ```bash
